@@ -3,7 +3,95 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Resolved safe-area insets, reused by the app shell below. */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --tabbar-h: 60px;
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
   body {
-    @apply antialiased;
+    @apply antialiased bg-ink-900 text-slate-100 font-sans;
+    /* Phone chrome: no rubber-band scroll on the page itself, no text
+       selection on taps, no tap highlight flash on buttons. */
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  /* Inputs are the one place selection must still work. */
+  input,
+  textarea {
+    -webkit-user-select: text;
+    user-select: text;
+    /* iOS zooms the viewport when focusing anything under 16px. */
+    font-size: 16px;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  /* Full-height column: fixed header, scrolling body, fixed tab bar. */
+  .app-shell {
+    @apply flex flex-col h-full overflow-hidden;
+  }
+
+  .app-header {
+    padding-top: var(--safe-top);
+    @apply shrink-0 bg-ink-800/95 backdrop-blur border-b border-white/5 z-20;
+  }
+
+  .app-scroll {
+    @apply flex-1 overflow-y-auto overflow-x-hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .app-tabbar {
+    padding-bottom: var(--safe-bottom);
+    @apply shrink-0 bg-ink-800/95 backdrop-blur border-t border-white/5 z-20;
+  }
+
+  /* Anything that sits above the tab bar (bid controls, sheet footers). */
+  .above-tabbar {
+    padding-bottom: calc(var(--safe-bottom) + 12px);
+  }
+
+  .card {
+    @apply bg-ink-700 border border-white/5 rounded-2xl;
+  }
+
+  /* 44px is the minimum comfortable touch target. */
+  .tap {
+    @apply min-h-[44px] active:scale-[0.97] transition-transform duration-100;
+  }
+
+  .chip {
+    @apply px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  /* Horizontal filter rails that snap, like a native segmented scroller. */
+  .snap-x-rail {
+    @apply flex gap-2 overflow-x-auto no-scrollbar snap-x snap-mandatory;
+    scroll-padding-left: 16px;
   }
 }

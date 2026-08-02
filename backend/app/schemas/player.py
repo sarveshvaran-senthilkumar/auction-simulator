@@ -1,9 +1,12 @@
-from pydantic import BaseModel, ConfigDict
 from typing import Optional
-from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict
+
 from ..db.models import PlayerRole
 
-class PlayerBase(BaseModel):
+
+class PlayerResponse(BaseModel):
+    id: str
     name: str
     nationality: str
     role: PlayerRole
@@ -12,9 +15,7 @@ class PlayerBase(BaseModel):
     set_name: Optional[str] = None
     is_overseas: bool
     age: Optional[int] = None
+    is_fallback_price: bool = False
+    base_impact_score: Optional[float] = None
 
-class PlayerResponse(PlayerBase):
-    id: UUID
-    is_fallback_price: bool
-    
     model_config = ConfigDict(from_attributes=True)

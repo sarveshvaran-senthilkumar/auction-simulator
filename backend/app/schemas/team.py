@@ -1,16 +1,16 @@
+from typing import Optional
+
 from pydantic import BaseModel, ConfigDict
-from typing import Optional, List
-from uuid import UUID
 
-class TeamBase(BaseModel):
+
+class TeamResponse(BaseModel):
+    id: str
+    room_id: str
     franchise_code: str
+    user_id: Optional[str] = None
     is_ai: bool
-
-class TeamResponse(TeamBase):
-    id: UUID
-    room_id: UUID
-    user_id: Optional[UUID] = None
     purse_remaining_lakh: int
-    overseas_slots_used: int
-    
+    overseas_slots_used: int = 0
+    retention_confirmed: bool = False
+
     model_config = ConfigDict(from_attributes=True)

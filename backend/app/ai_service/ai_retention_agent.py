@@ -1,47 +1,70 @@
+"""AI retention strategy: value-ranked, role-aware, with per-team appetite."""
+
 import random
-from typing import List, Dict
+from typing import Dict, List
+
+from ..engine.retention_engine import RetentionSlabRules, retention_engine
+from .impact_engine import StatsView, impact_engine
+
 
 class AIRetentionAgent:
-    def decide_retentions(self, squad_2024: List[Dict], impact_scores: Dict[str, float]) -> List[Dict]:
+    def decide_retentions(self, team, squad: List, venue=None) -> List[Dict]:
+        """`squad` is a list of PlayerRef for this franchise's 2024 side.
+
+        Returns picks in the order they should occupy retention slots.
         """
-        Decides which players to retain for an AI team based on Impact Scores.
-        Returns a list of selected players and their assigned slots.
-        """
-        # Sort squad by impact score descending
-        sorted_squad = sorted(
-            squad_2024, 
-            key=lambda p: impact_scores.get(str(p['player_id']), 0), 
-            reverse=True
-        )
-        
-        retained = []
-        capped_retained = 0
-        uncapped_retained = 0
-        
-        # Determine how aggressive this AI should be (retain 3-6 players)
-        target_retentions = random.randint(3, 6)
-        
-        for player in sorted_squad:
-            if len(retained) >= target_retentions:
+        need = team.need()
+        scored = []
+        for player in squad:
+            impact = impact_engine.compute_impact(player, StatsView(player), need, venue)
+            scored.append((impact.suggested_value_lakh, impact.base_score, player))
+        scored.sort(key=lambda row: row[0], reverse=True)
+
+        # Not every franchise maxes out -- some keep powder dry for the auction.
+        target = random.choices([3, 4, 5, 6], weights=[0.2, 0.3, 0.3, 0.2])[0]
+
+        picks: List[Dict] = []
+        capped_taken = 0
+        uncapped_taken = 0
+        role_taken: Dict[str, int] = {}
+        purse = team.purse_remaining_lakh
+
+        for market_value, _base, player in scored:
+            if len(picks) >= target:
                 break
-                
-            if player['is_capped']:
-                if capped_retained < 5:
-                    capped_retained += 1
-                    retained.append({
-                        "player_id": player['player_id'],
-                        "is_capped": True,
-                        "slot_no": capped_retained # Assign slots 1 to 5
-                    })
+
+            is_capped = player.is_capped
+            if is_capped and capped_taken >= RetentionSlabRules.MAX_CAPPED:
+                continue
+            if not is_capped and uncapped_taken >= RetentionSlabRules.MAX_UNCAPPED:
+                continue
+
+            cost = retention_engine.cost_for(
+                capped_taken + 1 if is_capped else 0, is_capped
+            )
+            if cost > purse:
+                continue
+
+            # Don't stockpile one role -- three of anything is plenty to retain.
+            if role_taken.get(player.role, 0) >= 3:
+                continue
+
+            # Only retain when the slab price is a fair deal against market value.
+            # Uncapped players at a flat 4cr are a bargain whenever they're good.
+            threshold = 0.75 if is_capped else 0.55
+            if market_value < cost * threshold:
+                continue
+
+            picks.append({"player_id": player.id, "is_capped": is_capped})
+            purse -= cost
+            role_taken[player.role] = role_taken.get(player.role, 0) + 1
+            if is_capped:
+                capped_taken += 1
             else:
-                if uncapped_retained < 2:
-                    uncapped_retained += 1
-                    retained.append({
-                        "player_id": player['player_id'],
-                        "is_capped": False,
-                        "slot_no": 0
-                    })
-                    
-        return retained
+                uncapped_taken += 1
+
+        return picks
+
+
 
 ai_retention_agent = AIRetentionAgent()

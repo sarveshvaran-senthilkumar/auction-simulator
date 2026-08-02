@@ -1,0 +1,92 @@
+[
+  {
+    "franchise_code": "CSK",
+    "ground_name": "MA Chidambaram Stadium, Chennai",
+    "avg_first_innings_score": 165.0,
+    "chase_success_pct": 42.0,
+    "pitch_tendency": "SPIN_FRIENDLY",
+    "boundary_size_category": "MEDIUM",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "MI",
+    "ground_name": "Wankhede Stadium, Mumbai",
+    "avg_first_innings_score": 182.0,
+    "chase_success_pct": 56.0,
+    "pitch_tendency": "BATTING_FRIENDLY",
+    "boundary_size_category": "SHORT",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "RCB",
+    "ground_name": "M Chinnaswamy Stadium, Bengaluru",
+    "avg_first_innings_score": 190.0,
+    "chase_success_pct": 54.0,
+    "pitch_tendency": "BATTING_FRIENDLY",
+    "boundary_size_category": "SHORT",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "KKR",
+    "ground_name": "Eden Gardens, Kolkata",
+    "avg_first_innings_score": 176.0,
+    "chase_success_pct": 50.0,
+    "pitch_tendency": "BALANCED",
+    "boundary_size_category": "MEDIUM",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "DC",
+    "ground_name": "Arun Jaitley Stadium, Delhi",
+    "avg_first_innings_score": 180.0,
+    "chase_success_pct": 52.0,
+    "pitch_tendency": "BATTING_FRIENDLY",
+    "boundary_size_category": "SHORT",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "RR",
+    "ground_name": "Sawai Mansingh Stadium, Jaipur",
+    "avg_first_innings_score": 170.0,
+    "chase_success_pct": 47.0,
+    "pitch_tendency": "BALANCED",
+    "boundary_size_category": "LARGE",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "PBKS",
+    "ground_name": "PCA Stadium, Mullanpur",
+    "avg_first_innings_score": 168.0,
+    "chase_success_pct": 49.0,
+    "pitch_tendency": "PACE_FRIENDLY",
+    "boundary_size_category": "LARGE",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "SRH",
+    "ground_name": "Rajiv Gandhi International Stadium, Hyderabad",
+    "avg_first_innings_score": 186.0,
+    "chase_success_pct": 51.0,
+    "pitch_tendency": "BATTING_FRIENDLY",
+    "boundary_size_category": "MEDIUM",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "LSG",
+    "ground_name": "Ekana Cricket Stadium, Lucknow",
+    "avg_first_innings_score": 162.0,
+    "chase_success_pct": 45.0,
+    "pitch_tendency": "SPIN_FRIENDLY",
+    "boundary_size_category": "LARGE",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  },
+  {
+    "franchise_code": "GT",
+    "ground_name": "Narendra Modi Stadium, Ahmedabad",
+    "avg_first_innings_score": 172.0,
+    "chase_success_pct": 48.0,
+    "pitch_tendency": "BALANCED",
+    "boundary_size_category": "LARGE",
+    "source_url": "https://en.wikipedia.org/wiki/Indian_Premier_League"
+  }
+]

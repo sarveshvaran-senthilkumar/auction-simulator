@@ -7,3 +7,12 @@ dist/
 build/
 .vscode/
 .idea/
+
+# Local SQLite database — regenerate with `python -m app.db.seed_db`
+*.db
+dev-dist/
+
+# tsc -b / vite build artifacts
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts

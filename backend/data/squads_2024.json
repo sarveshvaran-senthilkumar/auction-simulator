@@ -1,0 +1,1394 @@
+[
+  {
+    "franchise": "CSK",
+    "player_name": "Ruturaj Gaikwad",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Ravindra Jadeja",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "MS Dhoni",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Shivam Dube",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Matheesha Pathirana",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Deepak Chahar",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Moeen Ali",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Devon Conway",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Rachin Ravindra",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Ajinkya Rahane",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Daryl Mitchell",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Tushar Deshpande",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Maheesh Theekshana",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Shardul Thakur",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Mitchell Santner",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Mustafizur Rahman",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Sameer Rizvi",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Nishant Sindhu",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Rajvardhan Hangargekar",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Prashant Solanki",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Mukesh Choudhary",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Simarjeet Singh",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Shaik Rasheed",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "CSK",
+    "player_name": "Avanish Rao Aravelly",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Rohit Sharma",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Jasprit Bumrah",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Suryakumar Yadav",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Hardik Pandya",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Ishan Kishan",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Tilak Varma",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Tim David",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Piyush Chawla",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Gerald Coetzee",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Dewald Brevis",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Nehal Wadhera",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Romario Shepherd",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Naman Dhir",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Shams Mulani",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Kumar Kartikeya",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Akash Madhwal",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Nuwan Thushara",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Arjun Tendulkar",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Mohammad Nabi",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Luke Wood",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Shreyas Gopal",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Vishnu Vinod",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "MI",
+    "player_name": "Kwena Maphaka",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Virat Kohli",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Faf du Plessis",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Glenn Maxwell",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Mohammed Siraj",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Rajat Patidar",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Cameron Green",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Dinesh Karthik",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Yash Dayal",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Will Jacks",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Lockie Ferguson",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Alzarri Joseph",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Mayank Dagar",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Karn Sharma",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Vyshak Vijaykumar",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Reece Topley",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Akash Deep",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Suyash Prabhudessai",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Anuj Rawat",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Swapnil Singh",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Mahipal Lomror",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Manoj Bhandage",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Saurav Chauhan",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "RCB",
+    "player_name": "Tom Curran",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Shreyas Iyer",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Rinku Singh",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Andre Russell",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Sunil Narine",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Varun Chakravarthy",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Nitish Rana",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Venkatesh Iyer",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Mitchell Starc",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Phil Salt",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Harshit Rana",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Vaibhav Arora",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Anukul Roy",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Ramandeep Singh",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Suyash Sharma",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Rahmanullah Gurbaz",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Angkrish Raghuvanshi",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Sherfane Rutherford",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Manish Pandey",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "KS Bharat",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Chetan Sakariya",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Dushmantha Chameera",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Mujeeb Ur Rahman",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "KKR",
+    "player_name": "Allah Ghazanfar",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Rishabh Pant",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Axar Patel",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Kuldeep Yadav",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "David Warner",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Mitchell Marsh",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Tristan Stubbs",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Abishek Porel",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Anrich Nortje",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Khaleel Ahmed",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Ishant Sharma",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Mukesh Kumar",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Prithvi Shaw",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Jake Fraser-McGurk",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Sumit Kumar",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Lalit Yadav",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Kumar Kushagra",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Ricky Bhui",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Rasikh Salam",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Yash Dhull",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Vicky Ostwal",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Harry Brook",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Shai Hope",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Jhye Richardson",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "DC",
+    "player_name": "Praveen Dubey",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Sanju Samson",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Yashasvi Jaiswal",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Jos Buttler",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Riyan Parag",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Ravichandran Ashwin",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Trent Boult",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Yuzvendra Chahal",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Sandeep Sharma",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Shimron Hetmyer",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Dhruv Jurel",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Avesh Khan",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Rovman Powell",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Kuldeep Sen",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Nandre Burger",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Donovan Ferreira",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Tanush Kotian",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Kunal Rathore",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Keshav Maharaj",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Adam Zampa",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Shubham Dubey",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Navdeep Saini",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Prasidh Krishna",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "RR",
+    "player_name": "Abid Mushtaq",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Shikhar Dhawan",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Sam Curran",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Liam Livingstone",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Arshdeep Singh",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Kagiso Rabada",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Jonny Bairstow",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Harpreet Brar",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Rahul Chahar",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Jitesh Sharma",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Prabhsimran Singh",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Rilee Rossouw",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Shashank Singh",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Ashutosh Sharma",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Harshal Patel",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Nathan Ellis",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Chris Woakes",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Sikandar Raza",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Atharva Taide",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Vidwath Kaverappa",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Harpreet Bhatia",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Tanay Thyagarajan",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "PBKS",
+    "player_name": "Vishwanath Pratap Singh",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Pat Cummins",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Heinrich Klaasen",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Abhishek Sharma",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Travis Head",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Nitish Kumar Reddy",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Bhuvneshwar Kumar",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "T Natarajan",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Aiden Markram",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Rahul Tripathi",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Mayank Agarwal",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Washington Sundar",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Shahbaz Ahmed",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Marco Jansen",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Jaydev Unadkat",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Umran Malik",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Glenn Phillips",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Anmolpreet Singh",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Upendra Yadav",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Sanvir Singh",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Akash Singh",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Fazalhaq Farooqi",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Mayank Markande",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "SRH",
+    "player_name": "Wanindu Hasaranga",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "KL Rahul",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Nicholas Pooran",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Marcus Stoinis",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Ravi Bishnoi",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Mohsin Khan",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Deepak Hooda",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Krunal Pandya",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Quinton de Kock",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Devdutt Padikkal",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Ayush Badoni",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Yash Thakur",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Naveen-ul-Haq",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Mark Wood",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Kyle Mayers",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Krishnappa Gowtham",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Amit Mishra",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Prerak Mankad",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Arshad Khan",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Shamar Joseph",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Matt Henry",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Ashton Turner",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "M Siddharth",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "LSG",
+    "player_name": "Yudhvir Singh",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Shubman Gill",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Rashid Khan",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Sai Sudharsan",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Rahul Tewatia",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Mohit Sharma",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "David Miller",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Mohammed Shami",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Kane Williamson",
+    "role": "Batter",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Matthew Wade",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Wriddhiman Saha",
+    "role": "Wicket-Keeper",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Noor Ahmad",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Sai Kishore",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Vijay Shankar",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Abhinav Manohar",
+    "role": "Batter",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Spencer Johnson",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Umesh Yadav",
+    "role": "Bowler",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Azmatullah Omarzai",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Shahrukh Khan",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Darshan Nalkande",
+    "role": "All-Rounder",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Manav Suthar",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Sushant Mishra",
+    "role": "Bowler",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "BR Sharath",
+    "role": "Wicket-Keeper",
+    "was_capped": false
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Jayant Yadav",
+    "role": "All-Rounder",
+    "was_capped": true
+  },
+  {
+    "franchise": "GT",
+    "player_name": "Kartik Tyagi",
+    "role": "Bowler",
+    "was_capped": false
+  }
+]

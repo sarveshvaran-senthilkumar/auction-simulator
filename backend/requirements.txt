@@ -1,13 +1,8 @@
 fastapi>=0.110
 uvicorn[standard]>=0.27
 sqlalchemy>=2.0
-psycopg2-binary>=2.9
+aiosqlite>=0.19
 pydantic>=2.0
-alembic>=1.13
+pydantic-settings>=2.0
 python-dotenv>=1.0
-pandas>=2.1
-numpy>=1.26
-pdfplumber>=0.10
-beautifulsoup4>=4.12
-requests>=2.31
-pymongo>=4.6
+websockets>=12.0

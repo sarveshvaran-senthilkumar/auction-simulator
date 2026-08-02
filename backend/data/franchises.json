@@ -1,0 +1,72 @@
+[
+  {
+    "code": "CSK",
+    "name": "Chennai Super Kings",
+    "primary": "#F9CD05",
+    "secondary": "#0081C8",
+    "city": "Chennai"
+  },
+  {
+    "code": "MI",
+    "name": "Mumbai Indians",
+    "primary": "#004BA0",
+    "secondary": "#D1AB3E",
+    "city": "Mumbai"
+  },
+  {
+    "code": "RCB",
+    "name": "Royal Challengers Bengaluru",
+    "primary": "#D5152E",
+    "secondary": "#000000",
+    "city": "Bengaluru"
+  },
+  {
+    "code": "KKR",
+    "name": "Kolkata Knight Riders",
+    "primary": "#3A225D",
+    "secondary": "#D4AF37",
+    "city": "Kolkata"
+  },
+  {
+    "code": "DC",
+    "name": "Delhi Capitals",
+    "primary": "#17449B",
+    "secondary": "#EF1B23",
+    "city": "Delhi"
+  },
+  {
+    "code": "RR",
+    "name": "Rajasthan Royals",
+    "primary": "#EA1A85",
+    "secondary": "#254AA5",
+    "city": "Jaipur"
+  },
+  {
+    "code": "PBKS",
+    "name": "Punjab Kings",
+    "primary": "#DD1F2D",
+    "secondary": "#A7A9AC",
+    "city": "Mullanpur"
+  },
+  {
+    "code": "SRH",
+    "name": "Sunrisers Hyderabad",
+    "primary": "#F26522",
+    "secondary": "#000000",
+    "city": "Hyderabad"
+  },
+  {
+    "code": "LSG",
+    "name": "Lucknow Super Giants",
+    "primary": "#00A3E0",
+    "secondary": "#F7A81B",
+    "city": "Lucknow"
+  },
+  {
+    "code": "GT",
+    "name": "Gujarat Titans",
+    "primary": "#1B2133",
+    "secondary": "#B8974A",
+    "city": "Ahmedabad"
+  }
+]
