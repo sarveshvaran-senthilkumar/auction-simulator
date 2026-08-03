@@ -1,6 +1,7 @@
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 BACKEND_ROOT = Path(__file__).resolve().parent.parent
@@ -13,7 +14,19 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "IPL Auction Simulator"
     # Wide-open in dev so the app can be opened from a phone on the same LAN
     # (the origin is then http://<your-lan-ip>:5173, which we can't know upfront).
-    CORS_ORIGINS: List[str] = ["*"]
+    # In production set this to your frontend's URL, e.g.
+    #   CORS_ORIGINS=https://my-auction.vercel.app
+    # Comma-separated for several.
+    CORS_ORIGINS: Union[str, List[str]] = ["*"]
+
+    @field_validator("CORS_ORIGINS", mode="after")
+    @classmethod
+    def split_origins(cls, v):
+        # Env vars arrive as a plain string; a comma-separated list is far
+        # friendlier to type into a hosting dashboard than JSON.
+        if isinstance(v, str):
+            return [o.strip() for o in v.split(",") if o.strip()]
+        return v
 
     # Database — SQLite by default so the app runs with zero setup.
     # Point DATABASE_URL at postgresql+asyncpg://... to switch back.

@@ -1,0 +1,52 @@
+# Render blueprint for the backend + its database.
+# Create via Render dashboard -> New -> Blueprint, pointed at this repo.
+#
+# The frontend is NOT here — it goes on Vercel (see vercel.json). Vercel's
+# serverless functions can't hold a WebSocket open, so the FastAPI service has
+# to live somewhere that runs a real long-lived process. Render does.
+
+services:
+  - type: web
+    name: ipl-auction-api
+    runtime: python
+    plan: starter          # see the note about `free` in README — it sleeps
+    rootDir: backend
+    region: singapore      # nearest to India; change to suit
+
+    # IMPORTANT: exactly one instance. The auction engine keeps live room state
+    # in memory behind a per-room asyncio.Lock, so a second instance would run a
+    # separate, invisible copy of every auction.
+    numInstances: 1
+
+    buildCommand: |
+      pip install -r requirements.txt &&
+      python scripts/build_seed_data.py &&
+      python scripts/scrape_player_stats.py
+
+    # --if-empty seeds the player pool on the very first boot and is a no-op on
+    # every redeploy, so user accounts and auction history survive deploys.
+    # Single worker, for the same reason as numInstances: 1.
+    startCommand: |
+      python -m app.db.seed_db --if-empty &&
+      python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.6"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ipl-auction-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true      # Render generates a strong random value
+      - key: CORS_ORIGINS
+        sync: false              # set to your Vercel URL in the dashboard
+      - key: GOOGLE_CLIENT_ID
+        sync: false              # optional; blank hides the Google button
+
+databases:
+  - name: ipl-auction-db
+    plan: basic-256mb
+    region: singapore

@@ -1,10 +1,15 @@
 """Loads the static JSON dataset in `backend/data/` into the database.
 
-Safe to re-run: it drops and recreates every table.
+    python -m app.db.seed_db              # refuses to run over an existing DB
+    python -m app.db.seed_db --force      # wipe and reload — DESTROYS accounts
+    python -m app.db.seed_db --if-empty   # seed only a blank DB, else no-op
 
-    python -m app.db.seed_db          (from backend/, venv active)
+`--if-empty` is what a deployment should run on boot: the first release fills
+the player pool, and every redeploy after that leaves user accounts, rooms and
+auction history alone.
 """
 
+import argparse
 import asyncio
 import json
 import sys
@@ -43,7 +48,29 @@ def load(filename: str):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-async def seed() -> None:
+async def already_seeded() -> bool:
+    """True if the player pool is already loaded."""
+    from sqlalchemy import func, select
+
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    async with AsyncSessionLocal() as session:
+        count = (await session.execute(select(func.count()).select_from(Player))).scalar_one()
+    return bool(count)
+
+
+async def seed(force: bool = False, if_empty: bool = False) -> None:
+    if await already_seeded():
+        if if_empty:
+            print("players already loaded - leaving the database alone")
+            return
+        if not force:
+            raise SystemExit(
+                "This database already has players.\n"
+                "  --if-empty  leave it alone (use this on deploy)\n"
+                "  --force     wipe and reload (DESTROYS user accounts)"
+            )
+
     players_data = load("master_pool.json")
     squads_data = load("squads_2024.json")
     stats_data = load("player_stats.json")
@@ -141,6 +168,17 @@ async def report_top() -> None:
             print(f"  {stats.base_impact_score:5.1f}  {player.name:24s} {player.role.value}")
 
 
-if __name__ == "__main__":
-    asyncio.run(seed())
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--force", action="store_true",
+                        help="wipe and reload — destroys accounts and history")
+    parser.add_argument("--if-empty", action="store_true",
+                        help="seed a blank database, otherwise do nothing")
+    args = parser.parse_args()
+
+    asyncio.run(seed(force=args.force, if_empty=args.if_empty))
     asyncio.run(report_top())
+
+
+if __name__ == "__main__":
+    main()
