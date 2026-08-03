@@ -3,12 +3,57 @@
 @tailwind utilities;
 
 @layer base {
+  /* Palette as space-separated RGB channels, so Tailwind's `/opacity` syntax
+     works. Switching themes rewrites these eleven values and nothing else. */
+  :root,
+  :root[data-theme='dark'] {
+    --ink-900: 7 11 20;
+    --ink-800: 11 17 32;
+    --ink-700: 17 26 46;
+    --ink-600: 24 35 60;
+    --ink-500: 34 48 79;
+
+    --slate-100: 241 245 249;
+    --slate-200: 226 232 240;
+    --slate-300: 203 213 225;
+    --slate-400: 148 163 184;
+    --slate-500: 100 116 139;
+    --slate-600: 71 85 105;
+
+    --gold-400: 245 196 81;
+    --gold-500: 224 168 46;
+    --line: 255 255 255;
+    --on-accent: 11 17 32;
+
+    color-scheme: dark;
+  }
+
+  :root[data-theme='light'] {
+    --ink-900: 236 240 246; /* page */
+    --ink-800: 255 255 255; /* header + tab bar */
+    --ink-700: 255 255 255; /* cards */
+    --ink-600: 226 232 240;
+    --ink-500: 203 213 225;
+
+    /* Inverted ramp: 100 stays "most prominent", now meaning darkest. */
+    --slate-100: 15 23 42;
+    --slate-200: 30 41 59;
+    --slate-300: 51 65 85;
+    --slate-400: 71 85 105;
+    --slate-500: 100 116 139;
+    --slate-600: 148 163 184;
+
+    --gold-400: 234 179 8;
+    --gold-500: 202 138 4;
+    --line: 15 23 42;
+    --on-accent: 11 17 32;
+
+    color-scheme: light;
+  }
+
   :root {
-    /* Resolved safe-area insets, reused by the app shell below. */
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
-    --tabbar-h: 60px;
-    color-scheme: dark;
   }
 
   html,
@@ -19,13 +64,14 @@
 
   body {
     @apply antialiased bg-ink-900 text-slate-100 font-sans;
-    /* Phone chrome: no rubber-band scroll on the page itself, no text
-       selection on taps, no tap highlight flash on buttons. */
+    /* Phone chrome: no rubber-band scroll on the page itself, no text selection
+       on taps, no tap-highlight flash on buttons. */
     overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     user-select: none;
     touch-action: manipulation;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* Inputs are the one place selection must still work. */
@@ -50,7 +96,7 @@
 
   .app-header {
     padding-top: var(--safe-top);
-    @apply shrink-0 bg-ink-800/95 backdrop-blur border-b border-white/5 z-20;
+    @apply shrink-0 bg-ink-800/95 backdrop-blur border-b border-line/10 z-20;
   }
 
   .app-scroll {
@@ -61,7 +107,7 @@
 
   .app-tabbar {
     padding-bottom: var(--safe-bottom);
-    @apply shrink-0 bg-ink-800/95 backdrop-blur border-t border-white/5 z-20;
+    @apply shrink-0 bg-ink-800/95 backdrop-blur border-t border-line/10 z-20;
   }
 
   /* Anything that sits above the tab bar (bid controls, sheet footers). */
@@ -70,7 +116,7 @@
   }
 
   .card {
-    @apply bg-ink-700 border border-white/5 rounded-2xl;
+    @apply bg-ink-700 border border-line/10 rounded-2xl;
   }
 
   /* 44px is the minimum comfortable touch target. */
@@ -93,5 +139,12 @@
   .snap-x-rail {
     @apply flex gap-2 overflow-x-auto no-scrollbar snap-x snap-mandatory;
     scroll-padding-left: 16px;
+  }
+
+  /* Light mode has no elevation from colour alone, so cards need a real shadow. */
+  :root[data-theme='light'] .card,
+  :root[data-theme='light'] .app-header,
+  :root[data-theme='light'] .app-tabbar {
+    box-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
   }
 }

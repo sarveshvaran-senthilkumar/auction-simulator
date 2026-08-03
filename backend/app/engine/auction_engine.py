@@ -28,6 +28,7 @@ from ..db.models import (
     Squad2024Entry,
     Team,
     TeamRetention,
+    UnsoldRecord,
     Venue,
 )
 from . import rules
@@ -45,6 +46,11 @@ STAT_FIELDS = [
 
 # How many lots each format puts under the hammer. None = the whole pool.
 FORMAT_LOTS = {"QUICK": 80, "STANDARD": 150, "FULL": None}
+
+# A duel is two teams trading this many bids with nobody else joining in. The
+# app raises a heads-up card when one starts, and again every few bids after.
+WAR_BIDS = 6
+WAR_REPEAT_EVERY = 4
 
 
 class AuctionEngine:
@@ -384,6 +390,48 @@ class AuctionEngine:
             "seconds_remaining": lot.seconds_remaining,
             "history": [b.public() for b in lot.history[-8:]],
         })
+        await self._maybe_announce_war(room, lot)
+
+    async def _maybe_announce_war(self, room: RoomState, lot: LotState) -> None:
+        """Flag a two-team duel, with a side-by-side of where each side stands."""
+        if len(lot.history) < WAR_BIDS:
+            return
+
+        recent = lot.history[-WAR_BIDS:]
+        duellists = {b.team_id for b in recent}
+        if len(duellists) != 2:
+            return
+
+        # Announce on the bid that starts the duel, then periodically after.
+        depth = len(lot.history)
+        if depth != WAR_BIDS and (depth - WAR_BIDS) % WAR_REPEAT_EVERY != 0:
+            return
+
+        # Order by who is currently in front.
+        ordered = sorted(duellists, key=lambda tid: tid != lot.leading_team_id)
+        teams = [room.teams[tid] for tid in ordered if tid in room.teams]
+        if len(teams) != 2:
+            return
+
+        opened_at = lot.history[0].amount_lakh
+        await self._send(room.code, "BIDDING_WAR", {
+            "player": lot.player.public(),
+            "price_lakh": lot.current_bid_lakh,
+            "opened_at_lakh": opened_at,
+            "bids": depth,
+            "leading_team_id": lot.leading_team_id,
+            "teams": [
+                {
+                    **t.public(),
+                    "spent_lakh": settings.DEFAULT_PURSE_LAKH - t.purse_remaining_lakh,
+                    "last_bid_lakh": next(
+                        (b.amount_lakh for b in reversed(lot.history) if b.team_id == t.id),
+                        None,
+                    ),
+                }
+                for t in teams
+            ],
+        })
 
     async def place_bid(self, room_code: str, team_id: str, amount: int) -> tuple[bool, str]:
         async with self.lock(room_code):
@@ -564,6 +612,8 @@ class AuctionEngine:
         room.lots_done += 1
         seen = room.revisit_counts.get(lot.player.id, 0)
         revisit = seen < rules.MAX_REVISITS
+        if lot.player.id not in room.unsold_log:
+            room.unsold_log.append(lot.player.id)
         if revisit:
             room.revisit_counts[lot.player.id] = seen + 1
             room.revisit.append(lot.player.id)
@@ -571,8 +621,11 @@ class AuctionEngine:
             # has to grow too -- otherwise progress runs past 100%.
             room.total_lots += 1
 
+        await self._persist_unsold(room, lot.player, revisit)
         await self._send(room.code, "LOT_UNSOLD", {
-            "player": lot.player.public(), "revisit": revisit,
+            "player": lot.player.public(),
+            "revisit": revisit,
+            "unsold_count": len(room.unsold_players()),
         })
 
     def _impact_for_all(self, room: RoomState, player: PlayerRef) -> dict:
@@ -639,6 +692,18 @@ class AuctionEngine:
                     price_lakh=pick["retention_cost_lakh"],
                 ))
             session.add(RTMCard(room_id=room.id, team_id=team.id, cards_remaining=team.rtm_cards))
+            await session.commit()
+
+    async def _persist_unsold(
+        self, room: RoomState, player: PlayerRef, returns_later: bool
+    ) -> None:
+        async with AsyncSessionLocal() as session:
+            session.add(UnsoldRecord(
+                room_id=room.id,
+                player_id=player.id,
+                pass_number=room.revisit_counts.get(player.id, 0) + 1,
+                returns_later=returns_later,
+            ))
             await session.commit()
 
     async def _persist_sale(

@@ -71,7 +71,7 @@ export default function Results() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.04 }}
                 className={`rounded-2xl overflow-hidden border ${
-                  isMe ? 'border-white/20' : 'border-white/5'
+                  isMe ? 'border-line/20' : 'border-line/5'
                 }`}
               >
                 <button

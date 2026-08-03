@@ -131,7 +131,7 @@ async def main() -> None:
                 problems.append(f"{t['franchise_code']} hoarded {count} {role}s")
 
     rtm_buys = [s for s in sold_log if s[3] == "RTM"]
-    print(f"\ntop 8 sales:")
+    print("\ntop 8 sales:")
     for name, fr, price, kind in sorted(sold_log, key=lambda s: -s[2])[:8]:
         print(f"  {price/100:6.2f}cr  {name:24s} -> {fr}  ({kind})")
     print(f"\nRTM buybacks: {len(rtm_buys)}")

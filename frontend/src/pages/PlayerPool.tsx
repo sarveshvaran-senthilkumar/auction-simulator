@@ -14,7 +14,15 @@ const ROLE_FILTERS = [
   { id: 'Wicket-Keeper', label: 'Keepers' },
 ]
 
+interface UnsoldPlayer extends Player {
+  times_unsold: number
+  returns: boolean
+}
+
+type Tab = 'pool' | 'unsold'
+
 export default function PlayerPool() {
+  const [tab, setTab] = useState<Tab>('pool')
   const [query, setQuery] = useState('')
   const [role, setRole] = useState('')
   const [overseasOnly, setOverseasOnly] = useState(false)
@@ -22,7 +30,19 @@ export default function PlayerPool() {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true)
   const [detail, setDetail] = useState<(Player & { impact: Impact }) | null>(null)
+  const [unsold, setUnsold] = useState<UnsoldPlayer[]>([])
   const showToast = useAuction((s) => s.showToast)
+  const roomCode = useAuction((s) => s.roomCode)
+  const unsoldCount = useAuction((s) => s.unsoldCount)
+
+  // Refetch whenever another player goes unsold, so the list stays live.
+  useEffect(() => {
+    if (!roomCode) return
+    api
+      .unsold(roomCode)
+      .then((data) => setUnsold(data.players))
+      .catch(() => {})
+  }, [roomCode, unsoldCount, tab])
 
   // Debounced so typing doesn't fire a request per keystroke on a phone keyboard.
   const params = useMemo(
@@ -62,16 +82,38 @@ export default function PlayerPool() {
   return (
     <>
       <header className="app-header px-4 pb-3">
-        <div className="pt-3">
+        {/* Pool vs unsold — the unsold list is where you hunt for bargains
+            on the second pass, so it gets equal billing. */}
+        <div className="pt-3 flex gap-2 p-1 bg-ink-700 rounded-2xl">
+          {([
+            { id: 'pool', label: 'All players' },
+            { id: 'unsold', label: `Unsold${unsold.length ? ` (${unsold.length})` : ''}` },
+          ] as const).map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`flex-1 h-10 rounded-xl text-sm font-bold transition-colors ${
+                tab === t.id ? 'bg-indigo-500 text-white' : 'text-slate-400'
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'pool' && (
+        <div className="mt-2.5">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search players…"
             autoCorrect="off"
             autoCapitalize="words"
-            className="w-full h-11 rounded-2xl bg-ink-700 border border-white/10 px-4 outline-none focus:border-indigo-400/60 text-[15px]"
+            className="w-full h-11 rounded-2xl bg-ink-700 border border-line/10 px-4 outline-none focus:border-indigo-400/60 text-[15px]"
           />
         </div>
+        )}
+        {tab === 'pool' && (
         <div className="snap-x-rail mt-2.5 -mx-4 px-4">
           {ROLE_FILTERS.map((filter) => (
             <button
@@ -93,31 +135,64 @@ export default function PlayerPool() {
             ✈ Overseas
           </button>
         </div>
+        )}
       </header>
 
       <div className="app-scroll px-4 pt-3 pb-6">
-        <div className="text-[11px] text-slate-500 mb-2 px-1">
-          {total} player{total === 1 ? '' : 's'} · sorted by impact
-        </div>
-        {loading && items.length === 0 ? (
-          <Spinner />
-        ) : items.length === 0 ? (
-          <EmptyState icon="🔍" title="No players match" hint="Try a different filter." />
+        {tab === 'pool' ? (
+          <>
+            <div className="text-[11px] text-slate-500 mb-2 px-1">
+              {total} player{total === 1 ? '' : 's'} · sorted by impact
+            </div>
+            {loading && items.length === 0 ? (
+              <Spinner />
+            ) : items.length === 0 ? (
+              <EmptyState icon="🔍" title="No players match" hint="Try a different filter." />
+            ) : (
+              <div className="space-y-1.5">
+                {items.map((player) => (
+                  <PlayerRow
+                    key={player.id}
+                    player={player}
+                    onClick={() => open(player)}
+                    subtitle={
+                      <span>
+                        {money(player.base_price_lakh)} base · {player.set_name}
+                      </span>
+                    }
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : unsold.length === 0 ? (
+          <EmptyState
+            icon="🗂️"
+            title="Nobody unsold yet"
+            hint="Players who draw no bid land here, and most come back around for a second pass."
+          />
         ) : (
-          <div className="space-y-1.5">
-            {items.map((player) => (
-              <PlayerRow
-                key={player.id}
-                player={player}
-                onClick={() => open(player)}
-                subtitle={
-                  <span>
-                    {money(player.base_price_lakh)} base · {player.set_name}
-                  </span>
-                }
-              />
-            ))}
-          </div>
+          <>
+            <div className="text-[11px] text-slate-500 mb-2 px-1">
+              {unsold.filter((p) => p.returns).length} returning later ·{' '}
+              {unsold.filter((p) => !p.returns).length} gone for good
+            </div>
+            <div className="space-y-1.5">
+              {unsold.map((player) => (
+                <PlayerRow
+                  key={player.id}
+                  player={player}
+                  onClick={() => open(player)}
+                  subtitle={
+                    <span className={player.returns ? 'text-amber-400' : 'text-slate-500'}>
+                      {player.returns ? 'Returns later' : 'Out of the auction'} ·{' '}
+                      {money(player.base_price_lakh)} base
+                    </span>
+                  }
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
 

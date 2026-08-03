@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .config import settings
 from .db.database import Base, engine
-from .routers import players, rooms
+from .routers import auth, players, rooms
 from .ws import auction_socket
 
 app = FastAPI(
@@ -20,6 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router)
 app.include_router(rooms.router)
 app.include_router(players.router)
 app.include_router(auction_socket.router)

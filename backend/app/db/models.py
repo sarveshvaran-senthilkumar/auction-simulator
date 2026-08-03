@@ -63,7 +63,17 @@ class User(Base):
 
     id = PK()
     display_name = Column(String, nullable=False)
+    # All of the below stay null for guests: joining a room by code still
+    # creates a throwaway user, so an account is never required to be dragged
+    # into someone else's auction.
+    username = Column(String, unique=True, index=True, nullable=True)
+    email = Column(String, unique=True, index=True, nullable=True)
+    password_hash = Column(String, nullable=True)
+    google_sub = Column(String, unique=True, index=True, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    is_guest = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_seen_at = Column(DateTime(timezone=True), server_default=func.now())
 
 
 class Room(Base):
@@ -134,6 +144,11 @@ class PlayerStats(Base):
     death_overs_economy = Column(Float, nullable=True)
     dot_ball_pct = Column(Float, nullable=True)
     match_winning_innings = Column(Integer, default=0)
+    # Share of career deliveries bowled/faced in the last 3 seasons — real
+    # evidence of current form, from Cricsheet.
+    recency = Column(Float, nullable=True)
+    # "cricsheet" for real records, "generated" for the deterministic fallback.
+    source = Column(String, nullable=True)
     base_impact_score = Column(Float, nullable=True)
     last_updated = Column(DateTime(timezone=True), server_default=func.now())
 
@@ -191,6 +206,22 @@ class RTMCard(Base):
     room_id = FK("rooms.id", index=True)
     team_id = FK("teams.id", index=True)
     cards_remaining = Column(Integer, default=0)
+
+
+class UnsoldRecord(Base):
+    """A player who went unsold, and whether they were queued for another pass.
+
+    Kept so the unsold list survives a server restart mid-auction.
+    """
+
+    __tablename__ = "unsold_records"
+
+    id = PK()
+    room_id = FK("rooms.id", index=True)
+    player_id = FK("players.id")
+    pass_number = Column(Integer, default=1)
+    returns_later = Column(Boolean, default=False)
+    at = Column(DateTime(timezone=True), server_default=func.now())
 
 
 class Bid(Base):

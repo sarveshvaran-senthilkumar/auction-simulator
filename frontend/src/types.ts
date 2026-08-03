@@ -115,6 +115,25 @@ export interface FeedItem {
   franchise?: string
 }
 
+/** A two-team duel, surfaced as a heads-up card mid-lot. */
+export interface BiddingWar {
+  player: Player
+  price_lakh: number
+  opened_at_lakh: number
+  bids: number
+  leading_team_id: string
+  teams: (Team & { spent_lakh: number; last_bid_lakh: number | null })[]
+}
+
+/** A transient banner: you took the lead, you were outbid, a lot closed. */
+export interface Ack {
+  id: number
+  tone: 'lead' | 'outbid' | 'won' | 'lost' | 'info'
+  title: string
+  detail?: string
+  franchise?: string
+}
+
 /** Either RTM prompt awaiting this user's yes/no. */
 export interface Decision {
   kind: 'RTM' | 'COUNTER'

@@ -1,10 +1,11 @@
 import random
-import string
+from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
+from ..auth.security import current_user_optional
 from ..config import settings
 from ..db.database import get_db
 from ..db.models import Room, RoomStatus, Team, User
@@ -44,10 +45,19 @@ def _room_payload(room: Room, teams: list[Team]) -> dict:
 
 @router.post("", response_model=RoomResponse)
 @router.post("/", response_model=RoomResponse, include_in_schema=False)
-async def create_room(req: RoomCreate, db: AsyncSession = Depends(get_db)):
-    host = User(display_name=req.host_display_name)
-    db.add(host)
-    await db.flush()
+async def create_room(
+    req: RoomCreate,
+    db: AsyncSession = Depends(get_db),
+    account: Optional[User] = Depends(current_user_optional),
+):
+    # A signed-in host keeps their account (and their name in the lobby);
+    # anyone else gets a throwaway user so the room still works.
+    if account is not None:
+        host = account
+    else:
+        host = User(display_name=req.host_display_name or "Manager")
+        db.add(host)
+        await db.flush()
 
     room = Room(
         room_code=await _unique_code(db),
@@ -97,7 +107,12 @@ async def get_room(code: str, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/{code}/join", response_model=RoomResponse)
-async def join_room(code: str, req: JoinRequest, db: AsyncSession = Depends(get_db)):
+async def join_room(
+    code: str,
+    req: JoinRequest,
+    db: AsyncSession = Depends(get_db),
+    account: Optional[User] = Depends(current_user_optional),
+):
     code = code.upper()
     room = (await db.execute(
         select(Room).where(Room.room_code == code)
@@ -114,8 +129,8 @@ async def join_room(code: str, req: JoinRequest, db: AsyncSession = Depends(get_
     if not target.is_ai:
         raise HTTPException(409, "That franchise is already taken")
 
-    user = None
-    if req.user_id:
+    user = account
+    if user is None and req.user_id:
         user = (await db.execute(
             select(User).where(User.id == req.user_id)
         )).scalar_one_or_none()
@@ -196,6 +211,21 @@ async def retention_pool(code: str, team_id: str):
         } if venue else None,
         "players": players,
         "purse_lakh": team.purse_remaining_lakh,
+    }
+
+
+@router.get("/{code}/unsold")
+async def unsold(code: str):
+    """Players who went unsold, and whether they come back around."""
+    code = code.upper()
+    room = auction_engine.get(code)
+    if room is None:
+        raise HTTPException(404, "Room not loaded")
+    players = room.unsold_players()
+    return {
+        "total": len(players),
+        "returning": sum(1 for p in players if p["returns"]),
+        "players": players,
     }
 
 

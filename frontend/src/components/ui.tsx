@@ -43,7 +43,7 @@ export function Button({
 }) {
   const styles = {
     primary: 'bg-indigo-500 text-white active:bg-indigo-600 disabled:bg-ink-600 disabled:text-slate-500',
-    gold: 'bg-gold-400 text-ink-900 active:bg-gold-500 disabled:bg-ink-600 disabled:text-slate-500',
+    gold: 'bg-gold-400 text-onAccent active:bg-gold-500 disabled:bg-ink-600 disabled:text-slate-500',
     ghost: 'bg-ink-600 text-slate-200 active:bg-ink-500 disabled:text-slate-600',
     danger: 'bg-rose-500 text-white active:bg-rose-600 disabled:bg-ink-600 disabled:text-slate-500',
   }[variant]
@@ -198,7 +198,7 @@ export function BottomSheet({
             onClick={dismissible ? onClose : undefined}
           />
           <motion.div
-            className="relative w-full bg-ink-800 rounded-t-3xl max-h-[88%] flex flex-col border-t border-white/10"
+            className="relative w-full bg-ink-800 rounded-t-3xl max-h-[88%] flex flex-col border-t border-line/10"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -212,7 +212,7 @@ export function BottomSheet({
             }}
           >
             <div className="shrink-0 pt-2.5 pb-1 grid place-items-center">
-              <div className="w-10 h-1 rounded-full bg-white/20" />
+              <div className="w-10 h-1 rounded-full bg-line/20" />
             </div>
             {title && (
               <div className="shrink-0 px-5 pb-3 text-base font-bold">{title}</div>
@@ -271,7 +271,7 @@ export function EmptyState({ icon, title, hint }: { icon: string; title: string;
 export function Spinner({ label }: { label?: string }) {
   return (
     <div className="py-16 grid place-items-center gap-3">
-      <div className="w-7 h-7 rounded-full border-2 border-white/15 border-t-indigo-400 animate-spin" />
+      <div className="w-7 h-7 rounded-full border-2 border-line/15 border-t-indigo-400 animate-spin" />
       {label && <div className="text-sm text-slate-400">{label}</div>}
     </div>
   )

@@ -65,7 +65,8 @@ window.eval(fs.readFileSync(path.join(DIST, script.replace(/^\//, '')), 'utf8'))
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 const root = () => document.getElementById('root')
 const text = () => root().textContent ?? ''
-const findByText = (needle, tag = 'button') =>
+// Router <Link>s render as anchors, so search both by default.
+const findByText = (needle, tag = 'button, a') =>
   [...document.querySelectorAll(tag)].find((el) => el.textContent?.includes(needle))
 
 function click(el, label) {
@@ -86,14 +87,62 @@ function check(name, ok, detail = '') {
 }
 
 await wait(700)
-check('home renders', text().includes('Mega Auction'))
+
+// ---------------------------------------------------------------- auth wall
+check('login screen is the entry point', text().includes('Sign in to take a franchise'))
+check('google button hidden when unconfigured', !text().includes('Continue with Google'))
+
+click(findByText('Create an account'), 'Create an account link')
+await wait(400)
+check('register screen reached', text().includes('Create account'))
+
+const uniq = `t${String(Date.now()).slice(-9)}`
+const [userField, emailField, passField] = document.querySelectorAll('input')
+
+check('username rule is stated up front', /2.20 characters/.test(text()))
+
+// A server-rejected username must produce a readable message, not "Request failed (422)".
+typeInto(userField, 'bad!name')
+typeInto(emailField, `${uniq}@example.com`)
+typeInto(passField, 'hunter2pass')
+await wait(200)
+click(findByText('Create Account'), 'Create Account (invalid username)')
+await wait(900)
+check('422 surfaces a readable reason, not a status code',
+  /letters.numbers/i.test(text()) && !/Request failed/.test(text()),
+  (text().match(/username:[^A-Z]*/i) || [''])[0].slice(0, 60))
+
+typeInto(userField, uniq)
+typeInto(passField, 'short')
+await wait(200)
+check('short password is flagged inline', /more character/.test(text()))
+
+typeInto(passField, 'hunter2pass')
+await wait(200)
+click(findByText('Create Account'), 'Create Account')
+await wait(1500)
+
+check('signed in and landed on home', text().includes('Mega Auction'))
+check('welcome greeting shows the username', text().includes(uniq),
+  text().slice(0, 60).replace(/\s+/g, ' '))
+check('theme toggle present', !!findByText('🌙') || !!findByText('☀️'))
+
+// Flip the theme and confirm it reaches the document.
+const themeBtn = findByText('🌙') || findByText('☀️')
+const before = document.documentElement.getAttribute('data-theme')
+click(themeBtn, 'theme toggle')
+await wait(350)
+const after = document.documentElement.getAttribute('data-theme')
+check('theme toggle switches data-theme', before !== after, `${before} -> ${after}`)
+click(findByText('🌙') || findByText('☀️'), 'theme toggle back')
+await wait(300)
+
 check('health probe reached backend', text().includes('Server online'), text().slice(-30))
 
 click(findByText('Create Auction'), 'Create Auction')
-await wait(250)
-typeInto(document.querySelector('input'), 'Headless')
-await wait(120)
+await wait(300)
 check('create form shows format picker', text().includes('Quick') && text().includes('Standard'))
+check('no name field now that we have an account', !text().includes('Your name'))
 
 click(findByText('Quick'), 'Quick format')
 await wait(100)

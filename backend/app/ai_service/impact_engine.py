@@ -63,6 +63,11 @@ TARGET_ROLE_MIX = {
 # Stats where a lower number is better, so the 0-1 normalisation flips.
 INVERTED = {"bowling_avg", "economy", "bowling_sr", "death_overs_economy"}
 
+# A roughly league-average score, and the caseload at which a player's rates are
+# taken at face value (about two full seasons).
+LEAGUE_BASELINE = 45.0
+RELIABLE_MATCHES = 40.0
+
 # Observed IPL ranges used to normalise each stat to 0-1.
 STAT_RANGE = {
     "batting_avg": (12.0, 46.0),
@@ -134,10 +139,17 @@ class ImpactEngine:
                 matches = getattr(stats, "matches", 0) or 0
                 score = min(1.0, matches / 110.0)
             elif stat_name == "recency":
-                # No season splits in the shipped dataset; age proxies for how
-                # much of the career record is still current form.
-                age = getattr(player, "age", None) or 28
-                score = 1.0 if age <= 27 else max(0.35, 1.0 - (age - 27) * 0.06)
+                # Cricsheet gives the real share of a player's deliveries in the
+                # last three seasons. Age is only the fallback for the handful of
+                # uncapped players with no IPL record at all.
+                measured = getattr(stats, "recency", None)
+                if measured is not None:
+                    # A player with a long career is never "100% recent", so
+                    # stretch the band: 40% of your work being recent is a lot.
+                    score = min(1.0, measured / 0.4)
+                else:
+                    age = getattr(player, "age", None) or 28
+                    score = 1.0 if age <= 27 else max(0.35, 1.0 - (age - 27) * 0.06)
             else:
                 score = _norm(stat_name, getattr(stats, stat_name, None))
 
@@ -149,12 +161,21 @@ class ImpactEngine:
         if total_weight == 0:
             return 45.0
 
-        raw = accumulated / total_weight
+        score = accumulated / total_weight * 100.0
+
+        # Shrink towards the league baseline in proportion to how much cricket the
+        # numbers are actually based on. Without this a teenager with one hot
+        # season and a 200 strike rate outranks Kohli on seven innings -- the
+        # rates are real, but there is not enough of a record to trust them.
+        matches = getattr(stats, "matches", 0) or 0
+        reliability = min(1.0, matches / RELIABLE_MATCHES)
+        score = LEAGUE_BASELINE + (score - LEAGUE_BASELINE) * reliability
+
         # Uncapped players carry more downside risk than their raw numbers imply.
         if not getattr(player, "is_capped", True):
-            raw *= 0.93
+            score *= 0.93
 
-        return round(max(0.0, min(100.0, raw * 100.0)), 2)
+        return round(max(0.0, min(100.0, score)), 2)
 
     # ------------------------------------------------------------------ Layer 2
     def context_score(

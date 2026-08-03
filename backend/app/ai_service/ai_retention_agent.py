@@ -66,5 +66,4 @@ class AIRetentionAgent:
         return picks
 
 
-
 ai_retention_agent = AIRetentionAgent()

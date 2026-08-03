@@ -19,11 +19,22 @@ class Settings(BaseSettings):
     # Point DATABASE_URL at postgresql+asyncpg://... to switch back.
     DATABASE_URL: str = f"sqlite+aiosqlite:///{DEFAULT_SQLITE_PATH.as_posix()}"
 
+    # Auth. Override SECRET_KEY in backend/.env before exposing this beyond
+    # your own network — it signs every session token.
+    SECRET_KEY: str = "dev-only-secret-change-me"
+    JWT_ALGORITHM: str = "HS256"
+    TOKEN_TTL_DAYS: int = 30
+    # From Google Cloud Console -> Credentials -> OAuth 2.0 Client ID (Web).
+    # Leave blank and the app simply hides the "Continue with Google" button.
+    GOOGLE_CLIENT_ID: str = ""
+
     # Auction rules
     DEFAULT_PURSE_LAKH: int = 12000
-    BID_TIMER_SECONDS: int = 12       # opening window on a fresh lot
-    BID_RESET_SECONDS: int = 7        # shorter window after each bid, so lots keep moving
-    MAX_LOT_SECONDS: int = 75         # hard stop: two rich teams can trade bids forever
+    BID_TIMER_SECONDS: int = 15       # opening window on a fresh lot
+    BID_RESET_SECONDS: int = 15       # window after each bid -- your time to counter
+    # Hard stop: bids reset the window, so two rich teams can otherwise trade
+    # increments forever. Scaled to the 15s window (a hot lot runs ~25 bids).
+    MAX_LOT_SECONDS: int = 180
     MIN_BID_INCREMENT_LAKH: int = 25
     MAX_SQUAD_SIZE: int = 25
     MIN_SQUAD_SIZE: int = 18

@@ -1,14 +1,15 @@
-"""Builds the static seed dataset the app ships with.
+"""Builds the seed dataset the app ships with: who is in the auction.
 
-The plan's original pipeline scraped the BCCI PDF, Wikipedia and Cricinfo. That
-is fragile and needs network access, so the checked-in path is this generator:
-a compact hand-maintained table of the IPL 2024 squads plus the 2025 mega-auction
-entrants, expanded into the JSON files `seed_db.py` loads.
+The roster lives in the hand-maintained PLAYERS table below -- the IPL 2024
+squads plus the 2025 mega-auction entrants -- and is expanded into the JSON
+files `seed_db.py` loads. The plan originally scraped a BCCI PDF and Wikipedia
+for this; a checked-in table is stable, offline, and easy to edit.
 
-Per-player performance stats are synthesised deterministically from the player's
-`rating` (their standing in the IPL market) and role, so rankings stay stable
-across runs and match cricket intuition. Swap these files for real scraped
-output whenever you want -- the schema is what `seed_db.py` reads.
+The performance stats this writes are *estimates*, derived deterministically
+from each player's `rating` so rankings stay stable across runs. They exist so
+the app is playable straight after this one script. Run
+`scrape_player_stats.py` afterwards to replace them with real Cricsheet records
+for the 251 players that have an IPL history.
 
     python scripts/build_seed_data.py
 """
@@ -438,8 +439,10 @@ FRANCHISES = [
     ("GT", "Gujarat Titans", "#1B2133", "#B8974A", "Ahmedabad"),
 ]
 
-# Calibrated offline against 2023-2025 sold prices (see calibrate_impact_weights.py).
-# Weights within a role sum to 1.0.
+# Role weights for the Impact Engine, calibrated against 2023-2025 sold prices.
+# Weights within a role sum to 1.0. Retune these to change what the scoring
+# values -- raising `strike_rate` rewards T20 hitters, raising `experience` and
+# `batting_avg` favours accumulators.
 WEIGHTS = {
     "Batter": {
         "batting_avg": 0.20, "strike_rate": 0.24, "powerplay_sr": 0.12,

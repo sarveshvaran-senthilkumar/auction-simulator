@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type {
+  Ack,
+  BiddingWar,
   Decision,
   FeedItem,
   Franchise,
@@ -33,6 +35,9 @@ interface AuctionState extends Session {
   results: TeamResult[] | null
   franchises: Franchise[]
   lastSold: { name: string; franchise: string; price: number; kind: string } | null
+  acks: Ack[]
+  war: BiddingWar | null
+  unsoldCount: number
 
   setSession: (s: Partial<Session>) => void
   setFranchises: (f: Franchise[]) => void
@@ -42,6 +47,9 @@ interface AuctionState extends Session {
   showToast: (text: string, tone?: 'error' | 'ok') => void
   clearToast: () => void
   clearDecision: () => void
+  pushAck: (ack: Omit<Ack, 'id'>) => void
+  dismissAck: (id: number) => void
+  dismissWar: () => void
   reset: () => void
 }
 
@@ -71,6 +79,9 @@ export const useAuction = create<AuctionState>()(
       results: null,
       franchises: [],
       lastSold: null,
+      acks: [],
+      war: null,
+      unsoldCount: 0,
 
       setSession: (s) => set(s),
       setFranchises: (franchises) => set({ franchises }),
@@ -86,6 +97,12 @@ export const useAuction = create<AuctionState>()(
       clearToast: () => set({ toast: null }),
       clearDecision: () => set({ decision: null }),
 
+      // At most two acknowledgements on screen, newest last.
+      pushAck: (ack) =>
+        set((state) => ({ acks: [...state.acks, { ...ack, id: ++feedId }].slice(-2) })),
+      dismissAck: (id) => set((state) => ({ acks: state.acks.filter((a) => a.id !== id) })),
+      dismissWar: () => set({ war: null }),
+
       reset: () =>
         set({
           ...emptySession,
@@ -96,6 +113,9 @@ export const useAuction = create<AuctionState>()(
           decision: null,
           results: null,
           lastSold: null,
+          acks: [],
+          war: null,
+          unsoldCount: 0,
         }),
 
       applyEvent: (type, payload) => {
@@ -134,6 +154,9 @@ export const useAuction = create<AuctionState>()(
               secondsRemaining: payload.lot.seconds_remaining,
               nextBidLakh: payload.next_bid_lakh,
               lastSold: null,
+              // A new lot clears anything left over from the last one.
+              acks: [],
+              war: null,
             })
             break
 
@@ -145,7 +168,10 @@ export const useAuction = create<AuctionState>()(
             set({ secondsRemaining: payload.seconds_remaining })
             break
 
-          case 'BID_PLACED':
+          case 'BID_PLACED': {
+            const wasLeading = state.lot?.leading_team_id === state.teamId
+            const nowLeading = payload.team_id === state.teamId
+
             set((s) => ({
               lot: s.lot
                 ? {
@@ -158,11 +184,36 @@ export const useAuction = create<AuctionState>()(
               nextBidLakh: payload.next_bid_lakh,
               secondsRemaining: payload.seconds_remaining,
             }))
+
+            if (nowLeading && !wasLeading) {
+              get().pushAck({
+                tone: 'lead',
+                title: 'Highest bid is yours',
+                detail: `${state.lot?.player.name ?? 'This lot'} at ${money(payload.amount_lakh)}`,
+              })
+            } else if (wasLeading && !nowLeading) {
+              get().pushAck({
+                tone: 'outbid',
+                title: `Outbid by ${payload.franchise_code}`,
+                detail: `Now ${money(payload.amount_lakh)}`,
+                franchise: payload.franchise_code,
+              })
+            }
+            break
+          }
+
+          case 'BIDDING_WAR':
+            set({ war: payload })
             break
 
-          case 'LOT_SOLD':
+          case 'LOT_SOLD': {
+            const mine = payload.team_id === state.teamId
+            // Only call it a loss if you were actually in the bidding.
+            const contested = (state.lot?.history ?? []).some((b) => b.team_id === state.teamId)
+
             set((s) => ({
               lot: s.lot ? { ...s.lot, status: 'SOLD' } : s.lot,
+              war: null,
               lastSold: {
                 name: payload.player.name,
                 franchise: payload.franchise_code,
@@ -170,6 +221,25 @@ export const useAuction = create<AuctionState>()(
                 kind: payload.acquisition_type,
               },
             }))
+
+            if (mine) {
+              get().pushAck({
+                tone: 'won',
+                title: `${payload.player.name} is yours`,
+                detail: `${money(payload.price_lakh)}${
+                  payload.acquisition_type === 'RTM' ? ' via RTM' : ''
+                }`,
+                franchise: payload.franchise_code,
+              })
+            } else if (contested) {
+              get().pushAck({
+                tone: 'lost',
+                title: `${payload.franchise_code} took ${payload.player.name}`,
+                detail: money(payload.price_lakh),
+                franchise: payload.franchise_code,
+              })
+            }
+
             get().pushFeed({
               kind: payload.acquisition_type === 'RTM' ? 'RTM' : 'SOLD',
               franchise: payload.franchise_code,
@@ -178,9 +248,14 @@ export const useAuction = create<AuctionState>()(
               )}${payload.acquisition_type === 'RTM' ? ' (RTM)' : ''}`,
             })
             break
+          }
 
           case 'LOT_UNSOLD':
-            set((s) => ({ lot: s.lot ? { ...s.lot, status: 'UNSOLD' } : s.lot }))
+            set((s) => ({
+              lot: s.lot ? { ...s.lot, status: 'UNSOLD' } : s.lot,
+              war: null,
+              unsoldCount: payload.unsold_count ?? s.unsoldCount,
+            }))
             get().pushFeed({
               kind: 'UNSOLD',
               text: `${payload.player.name} unsold${payload.revisit ? ' · returns later' : ''}`,

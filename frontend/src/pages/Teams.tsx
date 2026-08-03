@@ -36,7 +36,7 @@ export default function Teams() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.02 }}
               className={`rounded-2xl p-3.5 border ${
-                isMe ? 'border-white/20 bg-ink-600' : 'border-white/5 bg-ink-700'
+                isMe ? 'border-line/20 bg-ink-600' : 'border-line/5 bg-ink-700'
               }`}
             >
               <div className="flex items-center gap-3">

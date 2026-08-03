@@ -30,6 +30,7 @@ STAT_FIELDS = [
     "matches", "innings", "batting_avg", "strike_rate", "powerplay_sr",
     "death_overs_sr", "boundary_pct", "bowling_avg", "economy", "wickets",
     "bowling_sr", "death_overs_economy", "dot_ball_pct", "match_winning_innings",
+    "recency", "source",
 ]
 
 

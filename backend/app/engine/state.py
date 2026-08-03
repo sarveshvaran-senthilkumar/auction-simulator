@@ -193,6 +193,9 @@ class RoomState:
     # the lot: a fresh LotState is built for every pass, so a per-lot counter
     # would always read zero and requeue the same player forever.
     revisit_counts: Dict[str, int] = field(default_factory=dict)
+    # Every player who has gone unsold at least once, oldest first, so the app
+    # can show what is coming back around.
+    unsold_log: List[str] = field(default_factory=list)
     lot: Optional[LotState] = None
     lots_done: int = 0
     total_lots: int = 0
@@ -209,6 +212,22 @@ class RoomState:
             if team.user_id == user_id:
                 return team
         return None
+
+    def unsold_players(self) -> List[dict]:
+        """Unsold players, flagged by whether they still have a pass left."""
+        pending = set(self.revisit)
+        sold = {i.player_id for t in self.teams.values() for i in t.roster}
+        out = []
+        for pid in self.unsold_log:
+            player = self.players.get(pid)
+            if player is None or pid in sold:
+                continue  # picked up on a later pass
+            out.append({
+                **player.public(),
+                "times_unsold": self.revisit_counts.get(pid, 0),
+                "returns": pid in pending,
+            })
+        return out
 
     def owner_2024(self, player_id: str) -> Optional[TeamState]:
         for team in self.teams.values():

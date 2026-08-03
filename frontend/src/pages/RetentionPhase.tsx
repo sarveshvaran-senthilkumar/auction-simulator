@@ -180,7 +180,7 @@ export default function RetentionPhase() {
                 className={`flex-1 rounded-lg py-1.5 text-center border ${
                   entry
                     ? 'border-transparent'
-                    : 'border-dashed border-white/15 bg-transparent'
+                    : 'border-dashed border-line/15 bg-transparent'
                 }`}
                 style={entry ? { background: `${accent}26` } : undefined}
               >
@@ -261,7 +261,7 @@ export default function RetentionPhase() {
         </div>
       </div>
 
-      <div className="shrink-0 px-5 pt-3 bg-ink-800/95 backdrop-blur border-t border-white/5 above-tabbar">
+      <div className="shrink-0 px-5 pt-3 bg-ink-800/95 backdrop-blur border-t border-line/5 above-tabbar">
         <div className="flex items-center justify-between text-xs mb-2">
           <span className="text-slate-400">
             {picked.length} retained · <span className="text-gold-400 font-bold">{rtmCards} RTM cards</span>
@@ -295,7 +295,7 @@ export default function RetentionPhase() {
             </div>
           )}
         </div>
-        <div className="flex justify-between text-sm font-bold border-t border-white/10 pt-3 mb-2">
+        <div className="flex justify-between text-sm font-bold border-t border-line/10 pt-3 mb-2">
           <span>Purse after</span>
           <span className="tabular-nums">{money(remaining)}</span>
         </div>

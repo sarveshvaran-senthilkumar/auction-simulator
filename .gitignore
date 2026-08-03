@@ -12,7 +12,12 @@ build/
 *.db
 dev-dist/
 
+# Downloaded source archives — re-fetch with scripts/scrape_player_stats.py.
+# The derived backend/data/*.json IS committed; that's the seed dataset.
+backend/data/raw/
+
 # tsc -b / vite build artifacts
 *.tsbuildinfo
 frontend/vite.config.js
 frontend/vite.config.d.ts
+

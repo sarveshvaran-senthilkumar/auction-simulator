@@ -149,8 +149,8 @@ export default function Lobby() {
                     isMine
                       ? 'border-transparent ring-2'
                       : taken
-                        ? 'bg-ink-800 border-white/5 opacity-45'
-                        : 'bg-ink-700 border-white/5'
+                        ? 'bg-ink-800 border-line/5 opacity-45'
+                        : 'bg-ink-700 border-line/5'
                   }`}
                   style={
                     isMine
@@ -186,7 +186,7 @@ export default function Lobby() {
       </div>
 
       <div
-        className="shrink-0 px-5 pt-3 bg-ink-800/95 backdrop-blur border-t border-white/5 above-tabbar"
+        className="shrink-0 px-5 pt-3 bg-ink-800/95 backdrop-blur border-t border-line/5 above-tabbar"
       >
         <Button
           variant="gold"

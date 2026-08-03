@@ -93,7 +93,7 @@ export function RTMSheet({ decide }: { decide: (choice: boolean) => void }) {
 
 function Row({ label, value, muted }: { label: string; value: string; muted?: boolean }) {
   return (
-    <div className="flex justify-between items-center py-2 border-b border-white/5">
+    <div className="flex justify-between items-center py-2 border-b border-line/5">
       <span className="text-sm text-slate-400">{label}</span>
       <span className={`font-bold tabular-nums ${muted ? 'text-slate-400' : 'text-lg'}`}>
         {value}

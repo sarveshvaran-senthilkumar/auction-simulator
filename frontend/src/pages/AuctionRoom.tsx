@@ -2,7 +2,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import type { SocketContext } from '../RoomGate'
+import { Acks } from '../components/Acks'
+import { BiddingWarCard } from '../components/BiddingWarCard'
 import { BidTimer } from '../components/BidTimer'
+import { ThemeToggle } from '../components/ThemeToggle'
 import {
   Avatar,
   BottomSheet,
@@ -29,6 +32,7 @@ export default function AuctionRoom() {
   const feed = useAuction((s) => s.feed)
   const lastSold = useAuction((s) => s.lastSold)
   const connected = useAuction((s) => s.connected)
+  const war = useAuction((s) => s.war)
 
   const myTeam = room?.teams.find((t) => t.id === teamId)
   const myImpact = teamId ? impacts[teamId] : undefined
@@ -50,6 +54,10 @@ export default function AuctionRoom() {
 
   return (
     <>
+      {/* A bidding war takes the notification slot; acknowledgements use it
+          the rest of the time, so the two never overlap. */}
+      {war ? <BiddingWarCard /> : <Acks />}
+
       {/* Header: progress + timer, the two things you always need visible. */}
       <header className="app-header px-4 pb-2">
         <div className="flex items-center justify-between pt-2.5 gap-3">
@@ -61,7 +69,10 @@ export default function AuctionRoom() {
               Lot {room.lots_done + 1} of {room.total_lots}
             </div>
           </div>
-          <BidTimer seconds={seconds} active={bidding} />
+          <div className="flex items-center gap-2 shrink-0">
+            <ThemeToggle className="w-9 h-9 min-h-0" />
+            <BidTimer seconds={seconds} active={bidding} />
+          </div>
         </div>
         <div className="h-0.5 bg-ink-600 rounded-full mt-2 overflow-hidden">
           <motion.div
@@ -98,7 +109,7 @@ export default function AuctionRoom() {
           </div>
 
           {myImpact && (
-            <div className="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
+            <div className="mt-3 pt-3 border-t border-line/5 flex items-center justify-between">
               <div>
                 <div className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">
                   Worth to you
@@ -225,7 +236,7 @@ export default function AuctionRoom() {
               <div
                 key={team.id}
                 className={`shrink-0 rounded-xl px-2.5 py-1.5 min-w-[62px] border ${
-                  isLeading ? 'border-current' : 'border-white/5'
+                  isLeading ? 'border-current' : 'border-line/5'
                 } ${isMe ? 'bg-ink-600' : 'bg-ink-700'}`}
                 style={{ color: franchiseColor(team.franchise_code) }}
               >
@@ -251,7 +262,7 @@ export default function AuctionRoom() {
       </div>
 
       {/* Thumb-zone bid bar. */}
-      <div className="shrink-0 px-4 pt-3 bg-ink-800/95 backdrop-blur border-t border-white/5 above-tabbar">
+      <div className="shrink-0 px-4 pt-3 bg-ink-800/95 backdrop-blur border-t border-line/5 above-tabbar">
         <div className="flex items-center justify-between text-xs mb-2 px-1">
           <span className="text-slate-400">
             Purse <span className="font-bold text-slate-200">{money(myTeam?.purse_remaining_lakh ?? 0)}</span>
@@ -266,7 +277,7 @@ export default function AuctionRoom() {
             haptic(24)
             socket.placeBid(nextBid)
           }}
-          className="tap w-full h-16 rounded-2xl font-black text-lg flex items-center justify-center gap-2 bg-gold-400 text-ink-900 active:bg-gold-500 disabled:bg-ink-600 disabled:text-slate-500 disabled:active:scale-100"
+          className="tap w-full h-16 rounded-2xl font-black text-lg flex items-center justify-center gap-2 bg-gold-400 text-onAccent active:bg-gold-500 disabled:bg-ink-600 disabled:text-slate-500 disabled:active:scale-100"
         >
           {!connected
             ? 'Reconnecting…'
